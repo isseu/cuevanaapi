@@ -8,6 +8,7 @@ import CuevanaApi.Content.ContentType;
 public class CuevanaApi {
 	
 	final static String WEBPAGE_BASE = "http://www.cuevana.tv";
+	final static String WEBPAGE_CONTENT_BASE = "http://sc.cuevana.tv";
 	
 	//http://www.cuevana.tv/web/peliculas?&310&the-lord-of-the-rings-the-fellowship-of-the-ring
 	// otra wea antes

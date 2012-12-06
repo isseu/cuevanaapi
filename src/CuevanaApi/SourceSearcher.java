@@ -56,6 +56,7 @@ public class SourceSearcher {
 	}
 	public String CleanLink(String link) throws UnsupportedEncodingException
 	{
+		// Esto puede deberia cambiar
 		//linkto?url=http%3A%2F%2Fbayfiles.com%2Ffile%2Fuxa5%2FqHh8uQ%2FThe.Bourne.Legacy.2012.720p.BluRay.x264.DTS-HDChina.mp4%3Fcid%3D4759%26ctipo%3Dpelicula%26cdef%3D720
 		link = link.substring(link.indexOf("=") + 1);
 		link = link.substring(0, link.indexOf("%3Fcid"));
