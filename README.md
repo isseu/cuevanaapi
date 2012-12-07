@@ -7,7 +7,7 @@ API no oficial para [Cuevana.tv] en java, que la idea esque cambie mientras cuev
 **Proyecto**: [Codigo fuente][Source Code].
 
 **Depedencias**:  
-JSON-Simple 1.1.1 ([proyect][json]).
+JSON-Simple 1.1.1 ([proyecto][json]).
 
 # Author
 
