@@ -25,19 +25,32 @@ public class CuevanaApi {
 	
 	public ContentType get_type(String url) throws NotValidURL
 	{
-		if(url.matches("^http:\\/\\/(www\\.)?cuevana\\.(co|tv|me|com)\\/#!\\/peliculas\\/\\d+\\/.*$"))
+		if(url.matches("^http:\\/\\/(www\\.)?cuevana\\.(co|tv|me|com)\\/#!\\/peliculas\\/\\d+\\/.+$"))
 		{
 			return ContentType.MOVIE;
-		}else if(url.matches("^http:\\/\\/(www\\.)?cuevana\\.(co|tv|me|com)\\/#!\\/series\\/\\d+\\/.*\\/.*$"))
+		}else if(url.matches("^http:\\/\\/(www\\.)?cuevana\\.(co|tv|me|com)\\/#!\\/series\\/\\d+\\/.+\\/.+$"))
 		{
 			return ContentType.EPISODE;
 		}
 		throw new NotValidURL("URL Invalida");
 	}
 	
+	public Episode get_episode(String url) throws Exception
+	{
+		if(!url.matches("^http:\\/\\/(www\\.)?cuevana\\.(co|tv|me|com)\\/#!\\/series\\/\\d+\\/.+?\\/.+$"))
+		{
+			throw new NotValidURL("URL Invalida para el capitulo de la serie");
+		}
+		Pattern pattern = Pattern.compile("\\d+");
+		Matcher m_id =  pattern.matcher(url);
+		m_id.find();
+		int id = Integer.valueOf(m_id.group(0));
+		return new Episode(url, id);
+	}
+	
 	public Movie get_movie(String url) throws Exception
 	{
-		if(!url.matches("^http:\\/\\/(www\\.)?cuevana\\.(co|tv|me|com)\\/#!\\/peliculas\\/\\d+\\/.*$"))
+		if(!url.matches("^http:\\/\\/(www\\.)?cuevana\\.(co|tv|me|com)\\/#!\\/peliculas\\/\\d+\\/.+$"))
 		{
 			throw new NotValidURL("URL Invalida para una pelicula");
 		}

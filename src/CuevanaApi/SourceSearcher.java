@@ -43,7 +43,7 @@ public class SourceSearcher {
 								"%s/player/source_get?def=%s&audio=%s&host=%s&id=%s&tipo=%s&wup_premium=false",
 								CuevanaApi.WEBPAGE_BASE,
 								this.source.definicion.getValue(),
-								this.source.audio, 
+								this.source.audio.getId(), 
 								this.source.host,
 								this.source.contenido.getId(),
 								this.source.contenido.tipo.getValue()), 

@@ -1,7 +1,7 @@
 CuevanaAPI
 ==========
 
-API no oficial para [Cuevana.tv], que la idea esque cambie mientras cuevana tambien lo haga. Gracias a expresiones regulares y consultas se puede obtener el captcha necesario para obtener el link de la pelicula y los subtitulos además de informacion de la misma. 
+API no oficial para [Cuevana.tv] en java, que la idea esque cambie mientras cuevana tambien lo haga. Gracias a expresiones regulares y consultas se puede obtener el captcha necesario para obtener el link de la pelicula y los subtitulos además de informacion de la misma. 
 
 
 **Proyecto**: [Codigo fuente][Source Code].

@@ -60,59 +60,49 @@ public abstract class Content {
 		{
 			this.title = m.group(1).trim();
 		}
-		System.out.println(this.title);
 		m = Pattern.compile("\\<div\\>\\<b\\>Género\\:\\<\\/b\\>(.*?)\\<\\/div\\>").matcher(content);
 		if( m.find() )
 		{
 			this.gender = m.group(1).trim();
 		}
-		System.out.println(this.gender);
 		m = Pattern.compile("\\<div\\>\\<b\\>Idioma\\:\\<\\/b\\>(.*?)\\<\\/div\\>").matcher(content);
 		if( m.find() )
 		{
 			this.lenguaje = m.group(1).trim();
 		}
-		System.out.println(this.lenguaje);
 		m = Pattern.compile("\\<div\\>\\<b\\>Duración\\:\\<\\/b\\> (\\d+) min<\\/div\\>").matcher(content);
 		if( m.find() )
 		{
 			this.duration = Integer.valueOf(m.group(1));
 		}
-		System.out.println(this.duration);
-		m = Pattern.compile("<div><b>Reparto:<\\/b>(.*?)<\\/div>").matcher(content);
-		m.find();
-		m = Pattern.compile("<a href='\\#\\!\\/.*?'>(.+?)<\\/a>").matcher(m.group());
-		while( m.find())
+		m = Pattern.compile("<.*?>Reparto:?<\\/.*?>(.*?)<\\/div>").matcher(content);
+		if (m.find()) 
 		{
-			this.cast.add(m.group(1).trim());
+			m = Pattern.compile("<a href='\\#\\!\\/.*?'>(.+?)<\\/a>").matcher(m.group());
+			while (m.find()) {
+				this.cast.add(m.group(1).trim());
+			}
+			m = Pattern.compile("<div><b>Director:<\\/b> <a href='.*?'>(.+?)<\\/a><\\/div>").matcher(content);
 		}
-		System.out.println(Arrays.toString(cast.toArray()));
-		m = Pattern.compile("<div><b>Director:<\\/b> <a href='.*?'>(.+?)<\\/a><\\/div>").matcher(content);
 		if( m.find() )
 		{
 			this.director = m.group(1).trim();
 		}
-		System.out.println(this.director);
 		m = Pattern.compile("<h2>Sinopsis</h2>(.*?)<div class\\=\"sep\">").matcher(content);
 		if( m.find() )
 		{
 			this.plot = m.group(1).trim();
 		}
-		System.out.println(this.plot);
-		//
 		m = Pattern.compile("<div class=\"serie\">(\\d+)</div>").matcher(content);
 		if( m.find() )
 		{
 			this.year = Integer.valueOf(m.group(1));
 		}
-		System.out.println(this.year);
-		//
 		m = Pattern.compile("<div class=\"img\"><img src=\"(.*?)\" \\/><\\/div>").matcher(content);
 		if( m.find() )
 		{
 			this.image = m.group(1);
 		}
-		System.out.println(this.image);
 		this.dataFormat(content);
 	}
 	
@@ -136,7 +126,7 @@ public abstract class Content {
 			break;
 		}
 		String content = Util.getWebContent(url);
-		//var sources = {"2":{"360":["bayfiles","filebox","180upload"],"720":["bayfiles","cramit"]}}, sel_source = 0;
+		// var sources = {"2":{"360":["bayfiles","filebox","180upload"],"720":["bayfiles","cramit"]}}, sel_source = 0;
 		Matcher m = Pattern.compile("var sources \\= (.*?)\\, sel_source").matcher(content);
 		if(m.find())
 		{
@@ -162,7 +152,16 @@ public abstract class Content {
 
 			}
 		}
-		System.out.println(content);
+	}
+	public String toString()
+	{
+		return "[+] Informacion:\n" +
+				"\t- Titulo: " + this.getTitle() + "\n" +
+				"\t- Id: " + this.getId() + "\n" +
+				"\t- Genero: " + this.getGender() + "\n" +
+				"\t- A\u00f1o: " + this.getYear() + "\n" +
+				"\t- Plot: " + this.getPlot().substring(0, 25) + " [...]\n" +
+				"\t- Image: " + this.getImage();
 	}
 	
 	abstract void dataFormat(String content);
@@ -258,6 +257,14 @@ public abstract class Content {
 	public ArrayList<Source> getSources() throws Exception {
 		this.loadSources();
 		return this.sources;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
