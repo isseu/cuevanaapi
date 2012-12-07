@@ -62,11 +62,11 @@ public class Prueba {
 		do {
 			System.out.print("[+] Source a buscar : ");
 			try {
-				opcion = Integer.valueOf(input.nextLine());
+				opcion = Integer.valueOf(input.nextLine()) - 1;
 			} catch (Exception e) {
 				continue;
 			}
-		} while (opcion <= 0 || opcion > sources.size());
+		} while (opcion < 0 || opcion > sources.size() - 1);
 		
 		SourceSearcher ss = new SourceSearcher(sources.get(1));
 		
